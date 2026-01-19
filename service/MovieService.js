@@ -4,7 +4,6 @@ class MovieService {
 
     async getAll() {
         try {
-
             const data = await movieModel.find();
             return {
                 data,
@@ -20,7 +19,8 @@ class MovieService {
         try {
             const createdMovie = movieModel.create(data);
             return createdMovie;
-        } catch (error) {
+        }
+        catch (error) {
             throw error;
         }
 
@@ -30,7 +30,8 @@ class MovieService {
         try {
             const movie = await movieModel.findById(id);
             return movie;
-        } catch (error) {
+        }
+        catch (error) {
             throw error;
         }
     }
@@ -40,8 +41,8 @@ class MovieService {
             let updated = await movieModel.findById(id);
             Object.assign(updated, data);
             return updated.save();
-
-        } catch (error) {
+        }
+        catch (error) {
             throw error
         }
     }
@@ -49,7 +50,8 @@ class MovieService {
     async deleteMoviebyId(id) {
         try {
             return await movieModel.findByIdAndDelete(id);
-        } catch (error) {
+        }
+        catch (error) {
             throw error;
         }
     }

@@ -10,7 +10,14 @@ const moviesSchema = new Schema({
         type: String
     },
     imdb: {
-        type: Number
+        type: Number,
+         default: 5.0
+    },
+    desc: {
+        type: String
+    },
+    artists: {
+        type: [String]
     },
     realseYear: {
         type: String
@@ -18,7 +25,8 @@ const moviesSchema = new Schema({
 },
     {
 
-        timestamps: true
+        timestamps: true,
+        optimisticConcurrency: true
     }
 )
 

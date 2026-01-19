@@ -10,7 +10,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: "http://localhost:5000",
+        url: "http://doshabcatering.az:5050",
         description: "Local server",
       },
     ],

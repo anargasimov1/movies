@@ -3,6 +3,14 @@ const MovieController = require("../controller/MovieController");
 
 const controller = new MovieController();
 
+router.get("/movies", controller.allMovies);
+router.post("/movies", controller.createMovie);
+router.get("/movies/:id", controller.getMovie);
+router.delete("/movies/:id", controller.delMovie);
+router.put("/movies/:id", controller.update);
+
+module.exports = router;
+
 /**
  * @swagger
  * components:
@@ -22,6 +30,14 @@ const controller = new MovieController();
  *         imdb:
  *           type: number
  *           example: 8.8
+ *         desc:
+ *           type: string
+ *           example: A mind-bending thriller by Christopher Nolan
+ *         artists:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["Leonardo DiCaprio", "Joseph Gordon-Levitt"]
  *         realseYear:
  *           type: string
  *           example: 2010
@@ -40,11 +56,18 @@ const controller = new MovieController();
  *         imdb:
  *           type: number
  *           example: 8.6
+ *         desc:
+ *           type: string
+ *           example: Space exploration epic
+ *         artists:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["Matthew McConaughey", "Anne Hathaway"]
  *         realseYear:
  *           type: string
  *           example: 2014
  */
-
 
 /**
  * @swagger
@@ -55,7 +78,7 @@ const controller = new MovieController();
 
 /**
  * @swagger
- * /movies:
+ * /api/movies:
  *   get:
  *     summary: Bütün filmləri gətir
  *     tags: [Movies]
@@ -69,11 +92,10 @@ const controller = new MovieController();
  *               items:
  *                 $ref: '#/components/schemas/Movie'
  */
-router.get("/movies", controller.allMovies);
 
 /**
  * @swagger
- * /movies:
+ * /api/movies:
  *   post:
  *     summary: Yeni film yarat
  *     tags: [Movies]
@@ -87,11 +109,10 @@ router.get("/movies", controller.allMovies);
  *       201:
  *         description: Movie created
  */
-router.post("/movies", controller.createMovie);
 
 /**
  * @swagger
- * /movies/{id}:
+ * /api/movies/{id}:
  *   get:
  *     summary: ID ilə film gətir
  *     tags: [Movies]
@@ -104,30 +125,15 @@ router.post("/movies", controller.createMovie);
  *     responses:
  *       200:
  *         description: Single movie
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Movie'
  */
-router.get("/movies/:id", controller.getMovie);
 
 /**
  * @swagger
- * /movies/{id}:
- *   delete:
- *     summary: Film sil
- *     tags: [Movies]
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Movie deleted
- */
-router.delete("/movies/:id", controller.delMovie);
-
-/**
- * @swagger
- * /movies/{id}:
+ * /api/movies/{id}:
  *   put:
  *     summary: Film yenilə
  *     tags: [Movies]
@@ -146,8 +152,25 @@ router.delete("/movies/:id", controller.delMovie);
  *     responses:
  *       200:
  *         description: Movie updated
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Movie'
  */
-router.put("/movies/:id", controller.update);
 
-
-module.exports = router;
+/**
+ * @swagger
+ * /api/movies/{id}:
+ *   delete:
+ *     summary: Film sil
+ *     tags: [Movies]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Movie deleted
+ */
